@@ -5,11 +5,13 @@ import Footer from '../Footer/Footer';
 
 const Root = () => {
     return (
-        <div className='max-w-[1920px] mx-auto'>
-            <Header></Header>
-            <Outlet></Outlet>
-            <Footer></Footer>
+      <div className="max-w-[1920px] mx-auto">
+        <Header></Header>
+        <div className="py-20 bg-[#F5F5F5]">
+          <Outlet></Outlet>
         </div>
+        <Footer></Footer>
+      </div>
     );
 };
 
