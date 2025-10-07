@@ -43,7 +43,7 @@ const Header = () => {
         <Link className="flex gap-1 items-center" to={"/"}>
           <img className="h-10" src={logo} />
           <h2 className="font-bold bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent">
-            HERO.IO
+            Appfinity
           </h2>
         </Link>
       </div>
