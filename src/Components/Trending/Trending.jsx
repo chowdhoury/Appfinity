@@ -23,7 +23,7 @@ const Trending = ({ appsPromise }) => {
       </div>
       <div className="flex justify-center">
         <Link to={"/apps"}>
-          <button className="flex items-center gap-[10px] rounded-sm bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] text-[#FFF] px-4 py-3 text-[16px] font-semibold">
+          <button className="cursor-pointer flex items-center gap-[10px] rounded-sm bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] text-[#FFF] px-4 py-3 text-[16px] font-semibold">
             <h2>Show All</h2>
           </button>
         </Link>

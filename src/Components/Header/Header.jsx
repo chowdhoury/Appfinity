@@ -54,7 +54,7 @@ const Header = () => {
       </div>
       <div className="navbar-end">
         <Link to={"https://github.com/chowdhoury"}>
-          <button className="flex items-center gap-[10px] rounded-sm bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] text-[#FFF] px-4 py-3 text-[16px] font-semibold">
+          <button className="cursor-pointer flex items-center gap-[10px] rounded-sm bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] text-[#FFF] px-4 py-3 text-[16px] font-semibold">
             <FaGithub></FaGithub>
             <h2>Contribute</h2>
           </button>
