@@ -4,7 +4,7 @@ import AppCard from '../../Components/AppCard/AppCard';
 const Apps = ({ appsPromise }) => {
     const appsData=use(appsPromise)
   return (
-    <div className="mt-20 px-2 lg:px-20">
+    <div className="px-2 lg:px-20">
       <div className="text-center">
         <h2 className="text-5xl text-[#001931] font-bold">
           Our All Applications
