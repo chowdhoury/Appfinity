@@ -1,8 +1,10 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import AppCard from '../../Components/AppCard/AppCard';
 
 const Apps = ({ appsPromise }) => {
-    const appsData=use(appsPromise)
+  const appsData = use(appsPromise)
+  const [appSearch, setAppSearch] = useState('');
+  const searchedApp=appsData.filter(appData=>appData.title.toLowerCase().includes(appSearch.toLowerCase()))
   return (
     <div className="px-2 lg:px-20">
       <div className="text-center">
@@ -13,9 +15,9 @@ const Apps = ({ appsPromise }) => {
           Explore All Apps on the Market developed by us. We code for Millions
         </p>
       </div>
-      <div className='flex justify-between items-center mt-10'>
+      <div className="flex justify-between items-center mt-10">
         <h3 className="text-2xl text-[#001931] font-semibold">
-          ({appsData.length}) Apps Found
+          ({searchedApp.length}) Apps Found
         </h3>
         <label className="input">
           <svg
@@ -34,13 +36,25 @@ const Apps = ({ appsPromise }) => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input type="search" required placeholder="Search App" />
+          <input
+            type="search"
+            value={appSearch}
+            onChange={(e) => setAppSearch(e.target.value)}
+            placeholder="Search App"
+            className="outline-none w-full bg-transparent"
+          />
         </label>
       </div>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {appsData.map((trendingApp) => (
-          <AppCard key={trendingApp.id} trendingApp={trendingApp}></AppCard>
-        ))}
+        {searchedApp.length > 0 ? (
+          searchedApp.map((trendingApp) => (
+            <AppCard key={trendingApp.id} trendingApp={trendingApp} />
+          ))
+        ) : (
+          <p className="text-center text-[#627382] col-span-full">
+            No apps found matching "{appSearch}"
+          </p>
+        )}
       </div>
     </div>
   );
