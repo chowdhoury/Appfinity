@@ -1,5 +1,6 @@
 import React, { use, useState } from 'react';
 import AppCard from '../../Components/AppCard/AppCard';
+import AppError from '../AppError/AppError';
 
 const Apps = ({ appsPromise }) => {
   const appsData = use(appsPromise)
@@ -50,12 +51,9 @@ const Apps = ({ appsPromise }) => {
           searchedApp.map((trendingApp) => (
             <AppCard key={trendingApp.id} trendingApp={trendingApp} />
           ))
-        ) : (
-          <p className="text-center text-[#627382] col-span-full">
-            No apps found matching "{appSearch}"
-          </p>
-        )}
+        ) : ''}
       </div>
+      {searchedApp.length===0?<AppError></AppError>:''}
     </div>
   );
 };

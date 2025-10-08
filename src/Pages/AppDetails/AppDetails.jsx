@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import downloadImg from "../../assets/icon-downloads.png";
 import ratingsImg from "../../assets/icon-ratings.png";
 import reviewImg from "../../assets/icon-review.png";
 import { useLoaderData, useParams } from "react-router";
-import { Bar, BarChart, CartesianGrid, ComposedChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  ComposedChart,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { toast } from "react-toastify";
 
 const AppDetails = () => {
   const id = useParams();
@@ -32,6 +43,12 @@ const AppDetails = () => {
     return star;
   });
   // console.log(ratingsData);
+
+  const [isClicked, setClicked] = useState(false);
+  const handleClick = () => {
+    setClicked(true);
+    toast.success('App Successfully Installed')
+  };
 
   return (
     <div className="mt-20 px-2 lg:px-20">
@@ -85,8 +102,18 @@ const AppDetails = () => {
               </h1>
             </div>
           </div>
-          <button className="text-white text-[20px] font-semibold px-5 py-4 rounded-sm bg-[#00D390] mt-[30px] cursor-pointer">
-            Install Now ({size} MB)
+          <button
+            onClick={handleClick}
+            disabled={isClicked} 
+            className={`text-white text-[20px] font-semibold px-5 py-4 rounded-sm mt-[30px] 
+    ${
+      isClicked
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-[#00D390] hover:bg-[#00b87e] cursor-pointer"
+    }
+    transition duration-200`}
+          >
+            {isClicked ? "Installed" : "Install Now"} ({size} MB)
           </button>
         </div>
       </div>
