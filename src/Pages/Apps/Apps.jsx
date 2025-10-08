@@ -34,7 +34,7 @@ const Apps = ({ appsPromise }) => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input type="search" required placeholder="Search" />
+          <input type="search" required placeholder="Search App" />
         </label>
       </div>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

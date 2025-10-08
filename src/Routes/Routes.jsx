@@ -22,7 +22,11 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      { path: "/apps/:appId", Component: AppDetails },
+        {
+            path: "/apps/:appId",
+            loader:()=>fetch('/appsData.json'),
+            Component: AppDetails
+        },
       { path: "/installation", Component: Installation },
     ],
     errorElement: <h1>Page not Found</h1>,
