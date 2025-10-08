@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import InstalledAppCard from '../../Components/InstalledAppCard/InstalledAppCard';
 
 const Installation = () => {
+  const [installed, setInstalled] = useState([])
+  useEffect(() => {
+    const installedList = JSON.parse(localStorage.getItem("installed"));
+    setInstalled(installedList)
+    // console.log(installedList)
+  },[])
     return (
       <div className="px-2 lg:px-20">
         <div className="text-center">
@@ -22,9 +28,10 @@ const Installation = () => {
             <option>High - Low</option>
           </select>
             </div>
-            <div className='mt-4 flex flex-col gap-4'>
-                <InstalledAppCard></InstalledAppCard>
-                <InstalledAppCard></InstalledAppCard>
+        <div className='mt-4 flex flex-col gap-4'>
+          {
+            installed.map(installedApp=><InstalledAppCard key={installedApp.id} installedApp={installedApp}></InstalledAppCard>)
+          }
             </div>
       </div>
     );

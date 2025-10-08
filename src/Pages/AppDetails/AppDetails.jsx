@@ -54,6 +54,12 @@ const AppDetails = () => {
   const handleClick = () => {
     setClicked(true);
     toast.success("App Successfully Installed");
+    const existingInstalledList = JSON.parse(localStorage.getItem('installed'))
+    let updatedInstalledList = [];
+    if (existingInstalledList) updatedInstalledList = [...existingInstalledList, appData]
+    else updatedInstalledList.push(appData)
+    localStorage.setItem('installed', JSON.stringify(updatedInstalledList))
+    // console.log(existingInstalledList)
   };
 
   return (

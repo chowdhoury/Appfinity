@@ -1,19 +1,18 @@
 import React from "react";
-import demo from '../../assets/demo-app (1).webp'
 import { toast } from "react-toastify";
 
-const InstalledAppCard = () => {
+const InstalledAppCard = ({ installedApp }) => {
+  const {image,title,downloads,ratingsAvg,size } = installedApp;
   const handleClick = () => {
-    toast.error('Successfully Uninstalled')
-  }
+    toast.error("Successfully Uninstalled");
+    
+  };
   return (
     <div className="p-4 bg-white flex justify-between items-center rounded-md">
       <div className="flex items-center gap-4">
-        <img className="h-20 rounded-xl" src={demo} alt="" />
+        <img className="h-20 rounded-xl" src={image} alt="" />
         <div>
-          <h4 className="text-[#001931] text-[20px] font-semibold">
-            Forest: Focus for Productivity
-          </h4>
+          <h4 className="text-[#001931] text-[20px] font-semibold">{title}</h4>
           <div className="flex items-center gap-4">
             <span className="flex items-center font-medium text-[16px] text-[#00D390] gap-1">
               <svg
@@ -42,7 +41,13 @@ const InstalledAppCard = () => {
                   fill="#00D390"
                 />
               </svg>
-              9M
+              {downloads / 1000000000000 >= 1
+                ? `${downloads / 1000000000000}T`
+                : downloads / 1000000000 >= 1
+                ? `${downloads / 1000000000}B`
+                : downloads / 1000000 >= 1
+                ? `${downloads / 1000000}M`
+                : `${downloads / 1000}K`}
             </span>
             <span className="flex items-center font-medium text-[16px] text-[#FF8811] gap-1">
               <svg
@@ -64,14 +69,17 @@ const InstalledAppCard = () => {
                   </clipPath>
                 </defs>
               </svg>
-              5
+              {ratingsAvg}
             </span>
-            <span className="text-[#627382] text-[16px]">258 MB</span>
+            <span className="text-[#627382] text-[16px]">{size} MB</span>
           </div>
         </div>
       </div>
       <div>
-        <button onClick={()=>handleClick()} className="text-white text-[16px] font-semibold bg-[#00D390] rounded-sm px-4 py-3 cursor-pointer transition duration-200 hover:bg-[#00b87e]">
+        <button
+          onClick={() => handleClick()}
+          className="text-white text-[16px] font-semibold bg-[#00D390] rounded-sm px-4 py-3 cursor-pointer transition duration-200 hover:bg-[#00b87e]"
+        >
           Uninstall
         </button>
       </div>
