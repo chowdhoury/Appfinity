@@ -12,8 +12,8 @@ const AppDetails = () => {
     // console.log(appId);
     // console.log(appsData);
     const appData = appsData.find(app => app.id === appId)
-    // console.log(appData);
-    const { image, title, companyName, downloads, ratingAvg, reviews, size} = appData;
+    console.log(appData);
+    const { image, title, companyName, downloads, ratingAvg, reviews, size, description} = appData;
   return (
     <div className="mt-20 px-2 lg:px-20">
       <div className="flex flex-col items-center md:flex-row gap-10">
@@ -28,14 +28,14 @@ const AppDetails = () => {
           <h2 className="text-[32px] text-[#001931] font-bold text-center md:text-start">
             {title}
           </h2>
-          <p className="text-[20px] text-[#627382]">
+          <p className="text-[20px] text-[#627382] text-center md:text-start">
             Developed by{" "}
-            <span className="font-semibold bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent">
+            <span className="font-semibold bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent ">
               {companyName}
             </span>
           </p>
           <hr className="w-full text-[#001931] opacity-20 my-[30px]" />
-          <div className="flex gap-20">
+          <div className="flex md:flex-row flex-col md:gap-20 gap-5">
             <div>
               <img className="h-10" src={downloadImg} alt="" />
               <p className="text-[#001931] opacity-80 my-2">Downloads</p>
@@ -70,15 +70,22 @@ const AppDetails = () => {
               </h1>
             </div>
           </div>
-          <button className="text-white text-40px] font-semibold px-5 py-4 rounded-sm bg-[#00D390] mt-[30px]">
+          <button className="text-white text-[20px] font-semibold px-5 py-4 rounded-sm bg-[#00D390] mt-[30px] cursor-pointer">
             Install Now ({size} MB)
           </button>
         </div>
       </div>
       <hr className="w-full text-[#001931] opacity-20 my-[40px]" />
-      <div></div>
+          <div>
+              ok
+      </div>
       <hr className="w-full text-[#001931] opacity-20 my-[40px]" />
-      <div></div>
+      <div>
+        <h3 className="text-2xl text-[#001931] font-semibold text-center md:text-start">Description</h3>
+        <p className="text-[20px] text-[#627382] mt-6 whitespace-pre-line">
+          {description}
+        </p>
+      </div>
     </div>
   );
 };
