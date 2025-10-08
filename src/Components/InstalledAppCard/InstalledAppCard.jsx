@@ -1,10 +1,17 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-const InstalledAppCard = ({ installedApp }) => {
-  const {image,title,downloads,ratingAvg,size } = installedApp;
+const InstalledAppCard = ({ installedApp, setInstalled }) => {
+  const { image, title, downloads, ratingAvg, size, id } = installedApp;
   const handleClick = () => {
     toast.error("Successfully Uninstalled");
+    console.log;
+    const existingInstalledList = JSON.parse(localStorage.getItem("installed"));
+    let updatedInstalledList = existingInstalledList.filter(
+      (item) => item.id !== id
+    );
+    setInstalled(updatedInstalledList)
+    localStorage.setItem("installed", JSON.stringify(updatedInstalledList));
   };
   return (
     <div className="p-4 bg-white flex justify-between items-center rounded-md">

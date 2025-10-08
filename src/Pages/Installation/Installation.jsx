@@ -30,7 +30,7 @@ const Installation = () => {
         </div>
         <div className="flex justify-between items-center mt-10">
           <h3 className="text-2xl text-[#001931] font-semibold">
-            1 Apps Found
+            {installed.length} Apps Found
           </h3>
           <select
             defaultValue="Apply Filter"
@@ -47,6 +47,7 @@ const Installation = () => {
             <InstalledAppCard
               key={installedApp.id}
               installedApp={installedApp}
+              setInstalled={setInstalled}
             ></InstalledAppCard>
           ))}
         </div>

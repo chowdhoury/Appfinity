@@ -21,7 +21,7 @@ import AppError from "../AppError/AppError";
 const AppDetails = () => {
   const id = useParams();
   const appId = parseInt(id.appId);
-  const { apps: appsData, loading, error } = useApps();
+  const { apps: appsData } = useApps();
   const [isClicked, setClicked] = useState(false);
 
   // console.log(appId);
