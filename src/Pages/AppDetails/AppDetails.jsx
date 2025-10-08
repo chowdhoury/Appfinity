@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import downloadImg from "../../assets/icon-downloads.png";
 import ratingsImg from "../../assets/icon-ratings.png";
 import reviewImg from "../../assets/icon-review.png";
-import { useLoaderData, useParams } from "react-router";
+import { useParams } from "react-router";
+import useApps from "../../Hooks/useApps";
 import {
   Bar,
   BarChart,
@@ -20,15 +21,15 @@ import AppError from "../AppError/AppError";
 const AppDetails = () => {
   const id = useParams();
   const appId = parseInt(id.appId);
-  const appsData = useLoaderData();
+  const { apps: appsData, loading, error } = useApps();
+  const [isClicked, setClicked] = useState(false);
+
   // console.log(appId);
   // console.log(appsData);
   const appData = appsData.find((app) => app.id === appId);
   // console.log(appData);
   if (!appData) {
-    return (
-      <AppError></AppError>
-    )
+    return <AppError></AppError>;
   }
   const {
     image,
@@ -50,10 +51,9 @@ const AppDetails = () => {
   });
   // console.log(ratingsData);
 
-  const [isClicked, setClicked] = useState(false);
   const handleClick = () => {
     setClicked(true);
-    toast.success('App Successfully Installed')
+    toast.success("App Successfully Installed");
   };
 
   return (
@@ -110,7 +110,7 @@ const AppDetails = () => {
           </div>
           <button
             onClick={handleClick}
-            disabled={isClicked} 
+            disabled={isClicked}
             className={`text-white text-[20px] font-semibold px-5 py-4 rounded-sm mt-[30px] 
     ${
       isClicked
