@@ -3,6 +3,7 @@ import Root from "../Components/Root/Root";
 import Home from "../Pages/Home/Home";
 import Apps from "../Pages/Apps/Apps";
 import Installation from "../Pages/Installation/Installation";
+import AppDetails from "../Pages/AppDetails/AppDetails";
 
 export const router = createBrowserRouter([
     {
@@ -11,7 +12,8 @@ export const router = createBrowserRouter([
         children: [
             { index: true, Component: Home },
             { path: '/apps', Component: Apps },
-            {path:'/installation',Component: Installation}
+            {path:"/apps/:appId",Component: AppDetails},
+            { path: '/installation', Component: Installation },
         ],
         errorElement: <h1>Page not Found</h1>
     }

@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Apps = () => {
+const AppDetails = () => {
     return (
         <div>
+            Ami App details
         </div>
     );
 };
 
-export default Apps;
+export default AppDetails;
