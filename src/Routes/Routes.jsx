@@ -8,8 +8,6 @@ import { Suspense } from "react";
 import PageError from "../Pages/PageError/PageError";
 import AppError from "../Pages/AppError/AppError";
 
-const appsPromise = fetch("/appsData.json").then((res) => res.json());
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -18,18 +16,13 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
       {
         path: "/apps",
-        element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
-            <Apps appsPromise={appsPromise}></Apps>
-          </Suspense>
-        ),
+        element:<Apps></Apps>
       },
       { path: "/installation", Component: Installation },
       {
         path: "/apps/:appId",
         loader: () => fetch("/appsData.json"),
         Component: AppDetails,
-        errorElement: <AppError></AppError>
       },
       {
         path: "/*",

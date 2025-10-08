@@ -1,10 +1,11 @@
 import React, { use } from "react";
 import AppCard from "../AppCard/AppCard";
 import { Link } from "react-router";
+import useApps from "../../Hooks/useApps";
 
-const Trending = ({ appsPromise }) => {
-  const appsData = use(appsPromise);
-  const trendingApps = [...appsData]
+const Trending = () => {
+  const { apps } = useApps();
+  const trendingApps = [...apps]
     .sort((a, b) => b.downloads - a.downloads)
     .slice(0, 8);
   // console.log(appsData)

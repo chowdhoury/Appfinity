@@ -4,7 +4,6 @@ import Banner from "../../Components/Banner/Banner";
 import Stats from "../../Components/Stats/Stats";
 import Trending from "../../Components/Trending/Trending";
 
-const appsPromise = fetch("/appsData.json").then((res) => res.json());
 
 const Home = () => {
   return (
@@ -13,7 +12,7 @@ const Home = () => {
       <Banner></Banner>
       <Stats></Stats>
       <Suspense fallback={<h1>Loading...</h1>}>
-        <Trending appsPromise={appsPromise}></Trending>
+        <Trending></Trending>
       </Suspense>
     </div>
   );

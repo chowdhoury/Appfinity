@@ -1,7 +1,11 @@
 import React from "react";
 import demo from '../../assets/demo-app (1).webp'
+import { toast } from "react-toastify";
 
 const InstalledAppCard = () => {
+  const handleClick = () => {
+    toast.error('Successfully Uninstalled')
+  }
   return (
     <div className="p-4 bg-white flex justify-between items-center rounded-md">
       <div className="flex items-center gap-4">
@@ -67,7 +71,7 @@ const InstalledAppCard = () => {
         </div>
       </div>
       <div>
-        <button className="text-white text-[16px] font-semibold bg-[#00D390] rounded-sm px-4 py-3 cursor-pointer">
+        <button onClick={()=>handleClick()} className="text-white text-[16px] font-semibold bg-[#00D390] rounded-sm px-4 py-3 cursor-pointer transition duration-200 hover:bg-[#00b87e]">
           Uninstall
         </button>
       </div>

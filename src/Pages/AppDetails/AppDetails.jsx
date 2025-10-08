@@ -15,6 +15,7 @@ import {
   YAxis,
 } from "recharts";
 import { toast } from "react-toastify";
+import AppError from "../AppError/AppError";
 
 const AppDetails = () => {
   const id = useParams();
@@ -24,6 +25,11 @@ const AppDetails = () => {
   // console.log(appsData);
   const appData = appsData.find((app) => app.id === appId);
   // console.log(appData);
+  if (!appData) {
+    return (
+      <AppError></AppError>
+    )
+  }
   const {
     image,
     title,

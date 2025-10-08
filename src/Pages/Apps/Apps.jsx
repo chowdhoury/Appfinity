@@ -1,11 +1,12 @@
 import React, { use, useState } from 'react';
 import AppCard from '../../Components/AppCard/AppCard';
 import AppError from '../AppError/AppError';
+import useApps from '../../Hooks/useApps';
 
-const Apps = ({ appsPromise }) => {
-  const appsData = use(appsPromise)
+const Apps = () => {
+  const { apps } = useApps();
   const [appSearch, setAppSearch] = useState('');
-  const searchedApp=appsData.filter(appData=>appData.title.toLowerCase().includes(appSearch.toLowerCase()))
+  const searchedApp=apps.filter(appData=>appData.title.toLowerCase().includes(appSearch.trim().toLowerCase()))
   return (
     <div className="px-2 lg:px-20">
       <div className="text-center">
