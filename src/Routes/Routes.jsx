@@ -5,6 +5,8 @@ import Apps from "../Pages/Apps/Apps";
 import Installation from "../Pages/Installation/Installation";
 import AppDetails from "../Pages/AppDetails/AppDetails";
 import { Suspense } from "react";
+import PageError from "../Pages/PageError/PageError";
+import AppError from "../Pages/AppError/AppError";
 
 const appsPromise = fetch("/appsData.json").then((res) => res.json());
 
@@ -22,13 +24,17 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-        {
-            path: "/apps/:appId",
-            loader:()=>fetch('/appsData.json'),
-            Component: AppDetails
-        },
       { path: "/installation", Component: Installation },
+      {
+        path: "/apps/:appId",
+        loader: () => fetch("/appsData.json"),
+        Component: AppDetails,
+        errorElement: <AppError></AppError>
+      },
+      {
+        path: "/*",
+        Component: PageError
+      },
     ],
-    errorElement: <h1>Page not Found</h1>,
   },
 ]);

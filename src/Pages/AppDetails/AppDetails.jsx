@@ -31,7 +31,7 @@ const AppDetails = () => {
     };
     return star;
   });
-  console.log(ratingsData);
+  // console.log(ratingsData);
 
   return (
     <div className="mt-20 px-2 lg:px-20">
