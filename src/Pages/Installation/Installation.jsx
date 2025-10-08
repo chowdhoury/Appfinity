@@ -3,11 +3,21 @@ import InstalledAppCard from '../../Components/InstalledAppCard/InstalledAppCard
 
 const Installation = () => {
   const [installed, setInstalled] = useState([])
+  const [filter, setFilter] = useState('')
+  // console.log(filter);
   useEffect(() => {
     const installedList = JSON.parse(localStorage.getItem("installed"));
-    setInstalled(installedList)
+    setInstalled(installedList);
     // console.log(installedList)
-  },[])
+  }, [])
+  
+  const sortedInstalled=() => {
+    if (filter === "ascending") {
+      return [...installed].sort((a,b)=>a.downloads-b.downloads)
+    } else if (filter === "descending") {
+      return [...installed].sort((a, b) => b.downloads - a.downloads);
+    }else return installed
+  }
     return (
       <div className="px-2 lg:px-20">
         <div className="text-center">
@@ -22,17 +32,24 @@ const Installation = () => {
           <h3 className="text-2xl text-[#001931] font-semibold">
             1 Apps Found
           </h3>
-          <select defaultValue="Sort By Size" className="select w-fit">
-            <option>Sort By Size</option>
-            <option>Low - High</option>
-            <option>High - Low</option>
+          <select
+            defaultValue="Apply Filter"
+            onChange={(e) => setFilter(e.target.value)}
+            className="select w-fit"
+          >
+            <option disabled={true}>Apply Filter</option>
+            <option value="descending">High - Low</option>
+            <option value="ascending">Low - High</option>
           </select>
-            </div>
-        <div className='mt-4 flex flex-col gap-4'>
-          {
-            installed.map(installedApp=><InstalledAppCard key={installedApp.id} installedApp={installedApp}></InstalledAppCard>)
-          }
-            </div>
+        </div>
+        <div className="mt-4 flex flex-col gap-4">
+          {sortedInstalled().map((installedApp) => (
+            <InstalledAppCard
+              key={installedApp.id}
+              installedApp={installedApp}
+            ></InstalledAppCard>
+          ))}
+        </div>
       </div>
     );
 };

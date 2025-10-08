@@ -2,10 +2,9 @@ import React from "react";
 import { toast } from "react-toastify";
 
 const InstalledAppCard = ({ installedApp }) => {
-  const {image,title,downloads,ratingsAvg,size } = installedApp;
+  const {image,title,downloads,ratingAvg,size } = installedApp;
   const handleClick = () => {
     toast.error("Successfully Uninstalled");
-    
   };
   return (
     <div className="p-4 bg-white flex justify-between items-center rounded-md">
@@ -69,7 +68,7 @@ const InstalledAppCard = ({ installedApp }) => {
                   </clipPath>
                 </defs>
               </svg>
-              {ratingsAvg}
+              {ratingAvg}
             </span>
             <span className="text-[#627382] text-[16px]">{size} MB</span>
           </div>
