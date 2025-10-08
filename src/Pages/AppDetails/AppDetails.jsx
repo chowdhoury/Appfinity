@@ -1,28 +1,43 @@
 import React from "react";
-import demo from "../../assets/demo-app (1).webp";
 import downloadImg from "../../assets/icon-downloads.png";
-import ratings from "../../assets/icon-ratings.png";
-import review from "../../assets/icon-review.png";
+import ratingsImg from "../../assets/icon-ratings.png";
+import reviewImg from "../../assets/icon-review.png";
 import { useLoaderData, useParams } from "react-router";
+import { Bar, BarChart, CartesianGrid, ComposedChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const AppDetails = () => {
-    const id = useParams()
-    const appId=parseInt(id.appId)
-    const appsData = useLoaderData();
-    // console.log(appId);
-    // console.log(appsData);
-    const appData = appsData.find(app => app.id === appId)
-    console.log(appData);
-    const { image, title, companyName, downloads, ratingAvg, reviews, size, description} = appData;
+  const id = useParams();
+  const appId = parseInt(id.appId);
+  const appsData = useLoaderData();
+  // console.log(appId);
+  // console.log(appsData);
+  const appData = appsData.find((app) => app.id === appId);
+  // console.log(appData);
+  const {
+    image,
+    title,
+    companyName,
+    downloads,
+    ratingAvg,
+    reviews,
+    size,
+    description,
+    ratings,
+  } = appData;
+  const ratingsData = ratings.map((rating) => {
+    const star = {
+      name: rating.name,
+      count: rating.count,
+    };
+    return star;
+  });
+  console.log(ratingsData);
+
   return (
     <div className="mt-20 px-2 lg:px-20">
       <div className="flex flex-col items-center md:flex-row gap-10">
         <div className="h-full">
-          <img
-            src={image}
-            className="w-[350px] h-100 object-cover rounded-sm"
-            alt=""
-          />
+          <img src={image} className="h-100 object-cover rounded-sm" alt="" />
         </div>
         <div className="flex-1 flex flex-col items-center md:block">
           <h2 className="text-[32px] text-[#001931] font-bold text-center md:text-start">
@@ -50,14 +65,14 @@ const AppDetails = () => {
               </h1>
             </div>
             <div>
-              <img className="h-10" src={ratings} alt="" />
+              <img className="h-10" src={ratingsImg} alt="" />
               <p className="text-[#001931] opacity-80 my-2">Average Ratings</p>
               <h1 className="text-[40px] text-[#001931] font-extrabold">
                 {ratingAvg}
               </h1>
             </div>
             <div>
-              <img className="h-10" src={review} alt="" />
+              <img className="h-10" src={reviewImg} alt="" />
               <p className="text-[#001931] opacity-80 my-2">Total Reviews</p>
               <h1 className="text-[40px] text-[#001931] font-extrabold">
                 {reviews / 1_000_000_000_000 >= 1
@@ -76,12 +91,28 @@ const AppDetails = () => {
         </div>
       </div>
       <hr className="w-full text-[#001931] opacity-20 my-[40px]" />
-          <div>
-              ok
+      <div>
+        <h3 className="text-2xl text-[#001931] font-semibold text-center md:text-start">
+          Ratings
+        </h3>
+        <ResponsiveContainer width="100%" height={256}>
+          <BarChart
+            data={ratingsData}
+            layout="vertical"
+            margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+          >
+            <XAxis type="number" />
+            <YAxis dataKey="name" type="category" reversed />
+            <Tooltip />
+            <Bar dataKey="count" fill="#FF8811" animationDuration={1200} />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
       <hr className="w-full text-[#001931] opacity-20 my-[40px]" />
       <div>
-        <h3 className="text-2xl text-[#001931] font-semibold text-center md:text-start">Description</h3>
+        <h3 className="text-2xl text-[#001931] font-semibold text-center md:text-start">
+          Description
+        </h3>
         <p className="text-[20px] text-[#627382] mt-6 whitespace-pre-line">
           {description}
         </p>
