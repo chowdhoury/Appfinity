@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AppCard from "../../Components/AppCard/AppCard";
 import AppError from "../AppError/AppError";
 import useApps from "../../Hooks/useApps";
@@ -9,6 +9,7 @@ const Apps = () => {
   useLoaderData();
   const { apps, loading, error } = useApps();
   const [appSearch, setAppSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
   const searchedApp =
     apps && Array.isArray(apps)
@@ -17,6 +18,18 @@ const Apps = () => {
         )
       : [];
 
+  useEffect(() => {
+    if (appSearch.trim()) {
+      setIsSearching(true);
+      const timer = setTimeout(() => {
+        setIsSearching(false);
+      }, 500);
+
+      return () => clearTimeout(timer);
+    } else {
+      setIsSearching(false);
+    }
+  }, [appSearch]);
 
   if (loading) {
     return (
@@ -33,7 +46,6 @@ const Apps = () => {
       </div>
     );
   }
-
 
   if (error) {
     return <AppError />;
@@ -79,14 +91,24 @@ const Apps = () => {
           />
         </label>
       </div>
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {searchedApp.length > 0
-          ? searchedApp.map((trendingApp) => (
-              <AppCard key={trendingApp.id} trendingApp={trendingApp} />
-            ))
-          : ""}
-      </div>
-      {searchedApp.length === 0 ? <AppError></AppError> : ""}
+      {isSearching ? (
+        <SkeletonLoader count={8} />
+      ) : (
+        <>
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {searchedApp.length > 0
+              ? searchedApp.map((trendingApp) => (
+                  <AppCard key={trendingApp.id} trendingApp={trendingApp} />
+                ))
+              : ""}
+          </div>
+          {searchedApp.length === 0 && appSearch.trim() ? (
+            <AppError></AppError>
+          ) : (
+            ""
+          )}
+        </>
+      )}
     </div>
   );
 };

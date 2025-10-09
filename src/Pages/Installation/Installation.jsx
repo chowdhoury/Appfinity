@@ -56,7 +56,7 @@ const Installation = () => {
           ))}
         </div>
       </div>
-      {sortedInstalled().length === 0 ? <AppError></AppError> : ""}
+      {(sortedInstalled()||[]).length === 0 ? <AppError></AppError> : ""}
     </div>
   );
 };
