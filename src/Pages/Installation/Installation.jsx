@@ -1,34 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import InstalledAppCard from '../../Components/InstalledAppCard/InstalledAppCard';
-import AppError from '../AppError/AppError';
+import React, { useEffect, useState } from "react";
+import InstalledAppCard from "../../Components/InstalledAppCard/InstalledAppCard";
+import AppError from "../AppError/AppError";
 
 const Installation = () => {
-  const [installed, setInstalled] = useState([])
-  const [filter, setFilter] = useState('')
+  const [installed, setInstalled] = useState([]);
+  const [filter, setFilter] = useState("");
   // console.log(filter);
   useEffect(() => {
     const installedList = JSON.parse(localStorage.getItem("installed"));
     setInstalled(installedList);
     // console.log(installedList)
-  }, [])
-  
-  const sortedInstalled=() => {
+  }, []);
+
+  const sortedInstalled = () => {
     if (filter === "ascending") {
-      return [...installed].sort((a,b)=>a.downloads-b.downloads)
+      return [...installed].sort((a, b) => a.downloads - b.downloads);
     } else if (filter === "descending") {
       return [...installed].sort((a, b) => b.downloads - a.downloads);
-    }else return installed
-  }
-    return (
-      <div className="px-2 lg:px-20">
-        <div className="text-center">
-          <h2 className="text-5xl text-[#001931] font-bold">
-            Your Installed Apps
-          </h2>
-          <p className="text-[20px] text-[#627382] mt-4">
-            Explore All Trending Apps on the Market developed by us
-          </p>
-        </div>
+    } else return installed;
+  };
+  return (
+    <div className="px-2 lg:px-20 flex flex-col min-h-100">
+      <div className="text-center">
+        <h2 className="text-5xl text-[#001931] font-bold">
+          Your Installed Apps
+        </h2>
+        <p className="text-[20px] text-[#627382] mt-4">
+          Explore All Trending Apps on the Market developed by us
+        </p>
+      </div>
+      <div className="flex-1">
         <div className="flex justify-between items-center mt-10">
           <h3 className="text-2xl text-[#001931] font-semibold">
             {installed?.length} Apps Found
@@ -52,9 +53,10 @@ const Installation = () => {
             ></InstalledAppCard>
           ))}
         </div>
-        {sortedInstalled.length === 0 ? <AppError></AppError> : ""}
       </div>
-    );
+      {sortedInstalled().length === 0 ? <AppError></AppError> : ""}
+    </div>
+  );
 };
 
 export default Installation;
