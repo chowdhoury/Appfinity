@@ -1,10 +1,11 @@
-import React, { use } from "react";
+import React from "react";
 import AppCard from "../AppCard/AppCard";
 import { Link } from "react-router";
 import useApps from "../../Hooks/useApps";
+import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 
 const Trending = () => {
-  const { apps } = useApps();
+  const { apps, loading } = useApps();
   const trendingApps = [...apps]
     .sort((a, b) => b.downloads - a.downloads)
     .slice(0, 8);
@@ -17,18 +18,24 @@ const Trending = () => {
           Explore All Trending Apps on the Market developed by us
         </p>
       </div>
-      <div className="my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {trendingApps.map((trendingApp) => (
-          <AppCard key={trendingApp.id} trendingApp={trendingApp}></AppCard>
-        ))}
-      </div>
-      <div className="flex justify-center">
-        <Link to={"/apps"}>
-          <button className="cursor-pointer flex items-center gap-[10px] rounded-sm bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] text-[#FFF] px-6 py-3 text-[16px] font-semibold">
-            <h2>Show All</h2>
-          </button>
-        </Link>
-      </div>
+      {loading ? (
+        <SkeletonLoader count={8} />
+      ) : (
+        <div className="my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {trendingApps.map((trendingApp) => (
+            <AppCard key={trendingApp.id} trendingApp={trendingApp}></AppCard>
+          ))}
+        </div>
+      )}
+      {!loading && (
+        <div className="flex justify-center">
+          <Link to={"/apps"}>
+            <button className="cursor-pointer flex items-center gap-[10px] rounded-sm bg-gradient-to-tr from-[#632EE3] to-[#9F62F2] text-[#FFF] px-6 py-3 text-[16px] font-semibold">
+              <h2>Show All</h2>
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

@@ -8,10 +8,19 @@ const useApps = () => {
 
     useEffect(() => {
         setLoading(true);
+        const startTime = Date.now();
+        
         axios('/appsData.json')
             .then(data => setApps(data.data))
             .catch(err => setError(err))
-        .finally(()=>setLoading(false))
+            .finally(() => {
+                const elapsedTime = Date.now() - startTime;
+                const remainingTime = Math.max(1000 - elapsedTime, 0);
+                
+                setTimeout(() => {
+                    setLoading(false);
+                }, remainingTime);
+            })
     }, [])
     return {apps,loading,error}
 }

@@ -1,13 +1,28 @@
-import React, { use, useState } from 'react';
-import AppCard from '../../Components/AppCard/AppCard';
-import AppError from '../AppError/AppError';
-import useApps from '../../Hooks/useApps';
-import SkeletonLoader from '../../Components/SkeletonLoader/SkeletonLoader';
+import React, { useState, useEffect } from "react";
+import AppCard from "../../Components/AppCard/AppCard";
+import AppError from "../AppError/AppError";
+import useApps from "../../Hooks/useApps";
+import SkeletonLoader from "../../Components/SkeletonLoader/SkeletonLoader";
 
 const Apps = () => {
-  const { apps } = useApps();
-  const [appSearch, setAppSearch] = useState('');
-  const searchedApp=apps.filter(appData=>appData.title.toLowerCase().includes(appSearch.trim().toLowerCase()))
+  const { apps, loading } = useApps();
+  const [appSearch, setAppSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const searchedApp = apps.filter((appData) =>
+    appData.title.toLowerCase().includes(appSearch.trim().toLowerCase())
+  );
+
+  useEffect(() => {
+    if (appSearch.trim()) {
+      setIsSearching(true);
+      const timer = setTimeout(() => {
+        setIsSearching(false);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setIsSearching(false);
+    }
+  }, [appSearch]);
   return (
     <div className="px-2 lg:px-20">
       <div className="text-center">
@@ -48,15 +63,24 @@ const Apps = () => {
           />
         </label>
       </div>
-      <SkeletonLoader/>
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {searchedApp.length > 0 ? (
-          searchedApp.map((trendingApp) => (
-            <AppCard key={trendingApp.id} trendingApp={trendingApp} />
-          ))
-        ) : ''}
-      </div>
-      {searchedApp.length===0?<AppError></AppError>:''}
+      {loading || isSearching ? (
+        <SkeletonLoader />
+      ) : (
+        <>
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {searchedApp.length > 0
+              ? searchedApp.map((trendingApp) => (
+                  <AppCard key={trendingApp.id} trendingApp={trendingApp} />
+                ))
+              : ""}
+          </div>
+          {searchedApp.length === 0 && appSearch.trim() && !isSearching ? (
+            <AppError></AppError>
+          ) : (
+            ""
+          )}
+        </>
+      )}
     </div>
   );
 };
