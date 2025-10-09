@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import downloadImg from "../../assets/icon-downloads.png";
 import ratingsImg from "../../assets/icon-ratings.png";
 import reviewImg from "../../assets/icon-review.png";
-import { useParams } from "react-router";
+import { useLoaderData, useParams } from "react-router";
 import useApps from "../../Hooks/useApps";
 import {
   Bar,
@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import AppError from "../AppError/AppError";
 
 const AppDetails = () => {
+  useLoaderData();
   const id = useParams();
   const appId = parseInt(id.appId);
   const { apps: appsData } = useApps();

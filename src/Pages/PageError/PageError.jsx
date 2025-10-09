@@ -1,8 +1,9 @@
 import React from "react";
 import errorPage from "../../assets/error-404.png";
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const PageError = () => {
+  useLoaderData();
   return (
     <div className=" px-2 lg:px-20">
       <div className="justify-items-center text-center">

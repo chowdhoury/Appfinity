@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import InstalledAppCard from "../../Components/InstalledAppCard/InstalledAppCard";
 import AppError from "../AppError/AppError";
+import { useLoaderData } from "react-router";
 
 const Installation = () => {
+  useLoaderData();
   const [installed, setInstalled] = useState([]);
   const [filter, setFilter] = useState("");
   // console.log(filter);

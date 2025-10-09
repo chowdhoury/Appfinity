@@ -13,20 +13,30 @@ export const router = createBrowserRouter([
     path: "/",
     Component: Root,
     children: [
-      { index: true, Component: Home },
+      {
+        index: true,
+        loader: () => fetch("/appsData.json"),
+        Component: Home,
+      },
       {
         path: "/apps",
-        hydrateFallbackElement: <p>Loading...</p>,
-        element:<Apps></Apps>
+        loader: () => fetch("/appsData.json"),
+        Component: Apps,
       },
-      { path: "/installation", Component: Installation },
+      {
+        path: "/installation",
+        loader: () => fetch("/appsData.json"),
+        Component: Installation,
+      },
       {
         path: "/apps/:appId",
+        loader: () => fetch("/appsData.json"),
         Component: AppDetails,
       },
       {
         path: "/*",
-        Component: PageError
+        loader: () => fetch("/appsData.json"),
+        Component: PageError,
       },
     ],
   },

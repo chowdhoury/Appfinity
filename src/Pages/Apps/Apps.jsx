@@ -1,17 +1,22 @@
-import React, { use, useState } from 'react';
-import AppCard from '../../Components/AppCard/AppCard';
-import AppError from '../AppError/AppError';
-import useApps from '../../Hooks/useApps';
-import SkeletonLoader from '../../Components/SkeletonLoader/SkeletonLoader';
+import React, { useState } from "react";
+import AppCard from "../../Components/AppCard/AppCard";
+import AppError from "../AppError/AppError";
+import useApps from "../../Hooks/useApps";
+import SkeletonLoader from "../../Components/SkeletonLoader/SkeletonLoader";
+import { useLoaderData } from "react-router";
 
 const Apps = () => {
+  useLoaderData();
   const { apps, loading, error } = useApps();
-  const [appSearch, setAppSearch] = useState('');
-  
+  const [appSearch, setAppSearch] = useState("");
+
   // Add null check for apps before filtering
-  const searchedApp = apps && Array.isArray(apps) 
-    ? apps.filter(appData => appData.title.toLowerCase().includes(appSearch.trim().toLowerCase()))
-    : [];
+  const searchedApp =
+    apps && Array.isArray(apps)
+      ? apps.filter((appData) =>
+          appData.title.toLowerCase().includes(appSearch.trim().toLowerCase())
+        )
+      : [];
 
   // Show loading state
   if (loading) {
@@ -25,7 +30,7 @@ const Apps = () => {
             Explore All Apps on the Market developed by us. We code for Millions
           </p>
         </div>
-        <SkeletonLoader/>
+        <SkeletonLoader />
       </div>
     );
   }
@@ -76,13 +81,13 @@ const Apps = () => {
         </label>
       </div>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {searchedApp.length > 0 ? (
-          searchedApp.map((trendingApp) => (
-            <AppCard key={trendingApp.id} trendingApp={trendingApp} />
-          ))
-        ) : ''}
+        {searchedApp.length > 0
+          ? searchedApp.map((trendingApp) => (
+              <AppCard key={trendingApp.id} trendingApp={trendingApp} />
+            ))
+          : ""}
       </div>
-      {searchedApp.length===0?<AppError></AppError>:''}
+      {searchedApp.length === 0 ? <AppError></AppError> : ""}
     </div>
   );
 };
