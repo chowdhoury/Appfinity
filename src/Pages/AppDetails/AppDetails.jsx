@@ -25,7 +25,7 @@ const AppDetails = () => {
   const [isClicked, setClicked] = useState(false);
   useEffect(() => {
     const existingInstalledList = JSON.parse(localStorage.getItem("installed"));
-    const isAlreadyInstalled = existingInstalledList.some(eIL => eIL.id === appId)
+    const isAlreadyInstalled = existingInstalledList?.some(eIL => eIL.id === appId)
     isAlreadyInstalled ? setClicked(true) : '';
   },[])
 

@@ -19,7 +19,7 @@ const InstalledAppCard = ({ installedApp, setInstalled }) => {
         <img className="h-20 rounded-xl" src={image} alt="" />
         <div>
           <h4 className="text-[#001931] text-[20px] font-semibold">{title}</h4>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <span className="flex items-center font-medium text-[16px] text-[#00D390] gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

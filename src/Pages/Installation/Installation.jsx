@@ -30,7 +30,7 @@ const Installation = () => {
         </div>
         <div className="flex justify-between items-center mt-10">
           <h3 className="text-2xl text-[#001931] font-semibold">
-            {installed.length} Apps Found
+            {installed?.length} Apps Found
           </h3>
           <select
             defaultValue="Apply Filter"
@@ -43,7 +43,7 @@ const Installation = () => {
           </select>
         </div>
         <div className="mt-4 flex flex-col gap-4">
-          {sortedInstalled().map((installedApp) => (
+          {sortedInstalled()?.map((installedApp) => (
             <InstalledAppCard
               key={installedApp.id}
               installedApp={installedApp}

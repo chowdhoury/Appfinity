@@ -16,6 +16,7 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
       {
         path: "/apps",
+        hydrateFallbackElement: <p>Loading...</p>,
         element:<Apps></Apps>
       },
       { path: "/installation", Component: Installation },
