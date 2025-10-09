@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InstalledAppCard from '../../Components/InstalledAppCard/InstalledAppCard';
+import AppError from '../AppError/AppError';
 
 const Installation = () => {
   const [installed, setInstalled] = useState([])
@@ -51,6 +52,7 @@ const Installation = () => {
             ></InstalledAppCard>
           ))}
         </div>
+        {sortedInstalled.length === 0 ? <AppError></AppError> : ""}
       </div>
     );
 };
