@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import downloadImg from "../../assets/icon-downloads.png";
 import ratingsImg from "../../assets/icon-ratings.png";
 import reviewImg from "../../assets/icon-review.png";
@@ -23,6 +23,11 @@ const AppDetails = () => {
   const appId = parseInt(id.appId);
   const { apps: appsData } = useApps();
   const [isClicked, setClicked] = useState(false);
+  useEffect(() => {
+    const existingInstalledList = JSON.parse(localStorage.getItem("installed"));
+    const isAlreadyInstalled = existingInstalledList.some(eIL => eIL.id === appId)
+    isAlreadyInstalled ? setClicked(true) : '';
+  },[])
 
   // console.log(appId);
   // console.log(appsData);
