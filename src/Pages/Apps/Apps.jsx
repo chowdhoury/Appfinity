@@ -10,7 +10,6 @@ const Apps = () => {
   const { apps, loading, error } = useApps();
   const [appSearch, setAppSearch] = useState("");
 
-  // Add null check for apps before filtering
   const searchedApp =
     apps && Array.isArray(apps)
       ? apps.filter((appData) =>
@@ -18,7 +17,7 @@ const Apps = () => {
         )
       : [];
 
-  // Show loading state
+
   if (loading) {
     return (
       <div className="px-2 lg:px-20">
@@ -35,7 +34,7 @@ const Apps = () => {
     );
   }
 
-  // Show error state
+
   if (error) {
     return <AppError />;
   }
