@@ -2,6 +2,7 @@ import React, { use, useState } from 'react';
 import AppCard from '../../Components/AppCard/AppCard';
 import AppError from '../AppError/AppError';
 import useApps from '../../Hooks/useApps';
+import SkeletonLoader from '../../Components/SkeletonLoader/SkeletonLoader';
 
 const Apps = () => {
   const { apps } = useApps();
@@ -47,6 +48,7 @@ const Apps = () => {
           />
         </label>
       </div>
+      <SkeletonLoader/>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {searchedApp.length > 0 ? (
           searchedApp.map((trendingApp) => (
